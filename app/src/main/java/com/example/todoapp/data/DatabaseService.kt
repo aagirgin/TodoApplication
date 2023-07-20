@@ -37,7 +37,7 @@ object DatabaseService {
 
     suspend fun addActivityElement(element: String) {
         val userDao = getUserDao()
-        val currentUser = getCurrentUser()
+
         currentUser?.let {
             val updatedActivities = it.listOfActivities.toMutableList()
 
@@ -47,5 +47,9 @@ object DatabaseService {
             it.listOfActivities = updatedActivities
             userDao.updateUser(it)
         }
+    }
+    suspend fun updateUserActivityStatus(user: ApplicationUser) {
+        val userDao = getUserDao()
+        userDao.updateUser(user)
     }
 }

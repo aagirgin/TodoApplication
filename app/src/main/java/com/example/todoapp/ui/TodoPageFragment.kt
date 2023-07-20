@@ -30,13 +30,13 @@ class TodoPageFragment : Fragment() {
         displayName(binding)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = RecViewAdapter()
+        adapter = RecViewAdapter(todoViewModel)
         recyclerView.adapter = adapter
 
         adapter.setOnItemClickListener(object : RecViewAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                todoViewModel.updateItemStatus(position)
-
+                DatabaseService.getCurrentUser()
+                    ?.let { todoViewModel.updateItemStatus(it,position) }
             }
         })
 
@@ -82,4 +82,5 @@ class TodoPageFragment : Fragment() {
             }
         }
     }
+
 }

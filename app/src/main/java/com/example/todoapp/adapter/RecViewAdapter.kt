@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
+import com.example.todoapp.data.DatabaseService
 import com.example.todoapp.model.Activities
+import com.example.todoapp.ui.TodoViewModel
 
 
-class RecViewAdapter : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {
+class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {
     private var data: List<Activities> = emptyList()
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -46,18 +48,21 @@ class RecViewAdapter : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {
         return ViewHolder(v)
     }
 
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val activity = data[position]
         holder.itemName.text = activity.activity
 
         if (activity.isDone == 1) {
-            holder.view.setBackgroundResource(R.color.appMainGreen)
+            holder.view.setBackgroundResource(R.drawable.radiobuttonselectorselected)
         } else {
             holder.view.setBackgroundResource(R.drawable.radiobuttonselector)
         }
 
         holder.view.setOnClickListener {
-            activity.isDone = if (activity.isDone == 1) 0 else 1
+            DatabaseService.getCurrentUser()
+                ?.let { it1 -> viewModel.updateItemStatus(it1, position) }
             notifyItemChanged(position)
         }
     }
