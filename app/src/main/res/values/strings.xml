@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ToDoApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loremipsum_onboard">Lorem ipsum dolor sit amet,
+consectetur adipisicing. Maxime,
+tempore! Animi nemo aut atque,
+ deleniti nihil dolorem repellendus.</string>
+    <string name="get_things_done_with_todo">Get things done with TODo</string>
+    <string name="get_started">Get Started</string>
+    <string name="enter_your_email_address">Enter your Email address</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="welcome_onboard">Welcome Onboard!</string>
+    <string name="sign_in"> Sign In</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="confirm_your_password">Confirm your Password</string>
+    <string name="create_a_password">Create a Password</string>
+    <string name="sign_up"> Sign Up</string>
+    <string name="dont_have_an_account">Dont have an account ?</string>
+    <string name="enter_your_full_name">Enter your Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="welcome_message">Welcome, %s</string>
+</resources>

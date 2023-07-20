@@ -1,0 +1,68 @@
+package com.example.todoapp.adapter
+
+import android.graphics.Color
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.todoapp.R
+import com.example.todoapp.model.Activities
+
+
+class RecViewAdapter : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {
+    private var data: List<Activities> = emptyList()
+    private var onItemClickListener: OnItemClickListener? = null
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var itemName: TextView = itemView.findViewById(R.id.textView7)
+        var view: View = itemView.findViewById(R.id.view3) // Add reference to the view
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.onItemClick(position)
+                }
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
+    fun setData(newData: List<Activities>) {
+        data = newData
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
+        return ViewHolder(v)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val activity = data[position]
+        holder.itemName.text = activity.activity
+
+        if (activity.isDone == 1) {
+            holder.view.setBackgroundResource(R.color.appMainGreen)
+        } else {
+            holder.view.setBackgroundResource(R.drawable.radiobuttonselector)
+        }
+
+        holder.view.setOnClickListener {
+            activity.isDone = if (activity.isDone == 1) 0 else 1
+            notifyItemChanged(position)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+}
