@@ -2,8 +2,10 @@ package com.example.todoapp.data
 
 import com.example.todoapp.model.Activities
 import com.example.todoapp.model.ApplicationUser
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UserDatabaseRepository @Inject constructor(
@@ -33,5 +35,12 @@ class UserDatabaseRepository @Inject constructor(
     suspend fun updateUserActivityStatus(user: ApplicationUser) {
         userDao.updateUser(user)
     }
+
+    suspend fun checkEmailExists(email: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            userDao.getUserByEmail(email) != null
+        }
+    }
+
 
 }

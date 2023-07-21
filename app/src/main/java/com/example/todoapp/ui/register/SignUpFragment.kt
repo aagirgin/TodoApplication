@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentSignUpBinding
 import com.example.todoapp.model.ApplicationUser
+import com.example.todoapp.model.SignUpError
 import com.example.todoapp.model.UiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -40,17 +41,24 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun mailValidation(mail:String):Boolean{
+    private fun mailValidation(mail:String): SignUpError.InvalidEmail? {
         val emailRegex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+.[A-Za-z]")
-        return emailRegex.matches(mail)
+        return if (emailRegex.matches(mail)) null else SignUpError.InvalidEmail
     }
 
-    private fun checkPassword(pass:String,pass2:String):Boolean{
-        return pass == pass2
+    private suspend fun checkforSameMailAddress(mail: String): SignUpError.EmailExists? {
+        val emailExists = signUpViewModel.checkEmailExists(mail)
+        return if (emailExists) SignUpError.EmailExists else null
+    }
+    private fun checkPassword(pass:String, pass2:String): SignUpError.PasswordMismatch? {
+        return if (pass == pass2) null else SignUpError.PasswordMismatch
     }
 
-    private fun isBlankItem(mail:String,pass:String,pass2:String,fullName:String): Boolean{
-        return !mail.isNullOrBlank() && !pass.isNullOrBlank() && !pass2.isNullOrBlank() && !fullName.isNullOrBlank()
+    private fun isBlankItem(mail:String, pass:String, pass2:String, fullName:String): SignUpError.BlankItem? {
+        return if (!mail.isNullOrBlank() && !pass.isNullOrBlank() && !pass2.isNullOrBlank() && !fullName.isNullOrBlank())
+            null
+        else
+            SignUpError.BlankItem
     }
 
     private fun registerUser(binding: FragmentSignUpBinding) {
@@ -61,22 +69,19 @@ class SignUpFragment : Fragment() {
             val passwordCheck = binding.confirmPassword.editText?.text.toString()
             val fullName = binding.enterFullName.editText?.text.toString()
 
+            lifecycleScope.launch {
             val isNotBlank = isBlankItem(mail,password,passwordCheck,fullName)
             val isValidMail = mailValidation(mail)
             val isPassMatch = checkPassword(password,passwordCheck)
+            val isMailNotSame = checkforSameMailAddress(mail)
 
-            println(isNotBlank)
-            println(isValidMail)
-            println(isPassMatch)
-
-            if(isNotBlank && isValidMail && isPassMatch){
+            if (isNotBlank == null && isValidMail == null && isPassMatch == null && isMailNotSame == null) {
                 val user = ApplicationUser(
                     mail = mail,
                     fullname = fullName,
                     password = password
                 )
                 signUpViewModel.signUpUser(user)
-                lifecycleScope.launch {
                     signUpViewModel.registerState.collect { state ->
                         when(state){
                             is UiState.Loading -> {
@@ -93,10 +98,12 @@ class SignUpFragment : Fragment() {
                         }
                     }
 
-                } }else{
-                    Toast.makeText(requireContext(), "Please re-check the fields or your password.", Toast.LENGTH_SHORT).show()
+                }  else {
+                val errorMessage = isNotBlank?.message ?: isValidMail?.message ?: isPassMatch?.message ?: isMailNotSame?.message
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
 
     }
 }

@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +19,16 @@ class SignUpViewModel@Inject constructor(
     val registerState: StateFlow<UiState<*>> get() = _registerState
 
 
+    private val _emailExistsState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
+    val emailExistsState: StateFlow<UiState<Boolean>> get() = _emailExistsState
 
+    suspend fun checkEmailExists(email: String): Boolean {
+        return try {
+            userDatabaseRepository.checkEmailExists(email)
+        } catch (e: Exception) {
+            return true
+        }
+    }
     fun signUpUser(user: ApplicationUser) {
         viewModelScope.launch {
             _registerState.value = UiState.Loading

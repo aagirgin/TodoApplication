@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.todomain
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

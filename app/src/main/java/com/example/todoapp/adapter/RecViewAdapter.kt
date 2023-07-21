@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.model.Activities
-import com.example.todoapp.ui.TodoViewModel
+import com.example.todoapp.ui.todomain.TodoViewModel
 
 
 class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {

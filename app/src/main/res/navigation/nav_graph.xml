@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onBoardFragment"
-        android:name="com.example.todoapp.ui.OnBoardFragment"
+        android:name="com.example.todoapp.ui.onboarding.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.todoapp.ui.LoginFragment"
+        android:name="com.example.todoapp.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.todoapp.ui.SignUpFragment"
+        android:name="com.example.todoapp.ui.register.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/additionFragment"
-        android:name="com.example.todoapp.ui.AdditionFragment"
+        android:name="com.example.todoapp.ui.addition.AdditionFragment"
         android:label="fragment_addition"
         tools:layout="@layout/fragment_addition" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/todoPageFragment"
-        android:name="com.example.todoapp.ui.TodoPageFragment"
+        android:name="com.example.todoapp.ui.todomain.TodoPageFragment"
         android:label="fragment_todo_page"
         tools:layout="@layout/fragment_todo_page" />
 </navigation>

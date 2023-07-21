@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.onboarding
 
 import android.os.Bundle
 import android.view.LayoutInflater

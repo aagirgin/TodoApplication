@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.login
 
 import androidx.lifecycle.ViewModel
 import com.example.todoapp.data.UserDatabaseRepository

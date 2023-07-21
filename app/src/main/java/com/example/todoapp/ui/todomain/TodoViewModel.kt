@@ -1,4 +1,4 @@
-package com.example.todoapp.ui
+package com.example.todoapp.ui.todomain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
