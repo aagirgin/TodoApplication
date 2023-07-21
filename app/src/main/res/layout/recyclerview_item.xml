@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable type="com.example.todoapp.model.Activities" name="activity" />
+        <variable type="com.example.todoapp.domain.model.Activities" name="activity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

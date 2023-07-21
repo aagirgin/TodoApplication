@@ -1,6 +1,6 @@
 package com.example.todoapp.data
 
-import com.example.todoapp.model.ApplicationUser
+import com.example.todoapp.domain.model.ApplicationUser
 
 object CurrentUserHolder {
     private var currentUser: ApplicationUser? = null

@@ -1,10 +1,8 @@
 package com.example.todoapp.data
 
-import com.example.todoapp.model.Activities
-import com.example.todoapp.model.ApplicationUser
+import com.example.todoapp.domain.model.Activities
+import com.example.todoapp.domain.model.ApplicationUser
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -12,7 +10,7 @@ class UserDatabaseRepository @Inject constructor(
     private val userDao: UserDao
 ) {
 
-    suspend fun registerUser(user:ApplicationUser){
+    suspend fun registerUser(user: ApplicationUser){
         userDao.insertUser(user)
     }
 

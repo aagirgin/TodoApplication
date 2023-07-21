@@ -2,7 +2,7 @@ package com.example.todoapp.ui.login
 
 import androidx.lifecycle.ViewModel
 import com.example.todoapp.data.UserDatabaseRepository
-import com.example.todoapp.model.ApplicationUser
+import com.example.todoapp.domain.model.ApplicationUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -15,7 +15,7 @@ import com.example.todoapp.R
 import com.example.todoapp.adapter.RecViewAdapter
 import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.databinding.FragmentTodoPageBinding
-import com.example.todoapp.model.UiState
+import com.example.todoapp.domain.state.UiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -3,8 +3,8 @@ package com.example.todoapp.ui.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.data.UserDatabaseRepository
-import com.example.todoapp.model.ApplicationUser
-import com.example.todoapp.model.UiState
+import com.example.todoapp.domain.model.ApplicationUser
+import com.example.todoapp.domain.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,4 +40,6 @@ class SignUpViewModel@Inject constructor(
             }
         }
     }
+
+
 }

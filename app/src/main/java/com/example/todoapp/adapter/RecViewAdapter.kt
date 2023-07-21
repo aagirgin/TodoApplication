@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.CurrentUserHolder
-import com.example.todoapp.model.Activities
+import com.example.todoapp.domain.model.Activities
 import com.example.todoapp.ui.todomain.TodoViewModel
 
 

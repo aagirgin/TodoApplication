@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentLoginBinding
+import com.example.todoapp.domain.state.LogInError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -37,6 +39,19 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun isBlankItem(mail:String, pass:String): LogInError.BlankItem? {
+        return if (!mail.isNullOrBlank() && !pass.isNullOrBlank())
+            null
+        else
+            LogInError.BlankItem
+    }
+
+    private suspend fun isWrongCredentials() : LogInError.InvalidCredentials? {
+        loginViewModel.currentUserState.collect{ it ->
+            if (it == null)
+                LogInError.InvalidCredentials
+        }
+    }
     private fun onPressLogin(binding: FragmentLoginBinding) {
         binding.loginButton.setOnClickListener {
             // Disable the login button to prevent multiple clicks during login process
@@ -46,17 +61,29 @@ class LoginFragment : Fragment() {
             val passwd = binding.password.editText?.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
-                try {
-                    loginViewModel.loginUser(email, passwd)
+                val isNotBlank = isBlankItem(email,passwd)
+                if(isNotBlank == null){
+                    try {
 
-                    loginViewModel.currentUserState.collect { currentUser ->
-                        if (currentUser != null) {
-                            findNavController().navigate(R.id.action_loginFragment_to_additionFragment)
+                        loginViewModel.loginUser(email, passwd)
+
+                        loginViewModel.currentUserState.collect { currentUser ->
+                            if (currentUser != null) {
+                                findNavController().navigate(R.id.action_loginFragment_to_additionFragment)
+                            }else{
+                                val errorMessage = LogInError.InvalidCredentials.message
+                                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                            }
+                            binding.loginButton.isEnabled = true
                         }
+                    } catch (e: Exception) {
                         binding.loginButton.isEnabled = true
                     }
-                } catch (e: Exception) {
+                }
+                else{
                     binding.loginButton.isEnabled = true
+                    val errorMessage = isNotBlank.message
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
         }

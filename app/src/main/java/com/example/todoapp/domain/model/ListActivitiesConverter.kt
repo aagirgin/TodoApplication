@@ -1,4 +1,4 @@
-package com.example.todoapp.model
+package com.example.todoapp.domain.model
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
