@@ -10,7 +10,6 @@ import com.example.todoapp.model.ApplicationUser
 interface UserDao {
     @Query("SELECT * FROM users WHERE mail = :email AND password = :password")
     suspend fun getUser(email: String, password: String): ApplicationUser?
-
     @Insert
     suspend fun insertUser(user: ApplicationUser)
 

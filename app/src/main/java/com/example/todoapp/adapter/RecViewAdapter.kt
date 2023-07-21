@@ -1,13 +1,12 @@
 package com.example.todoapp.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
-import com.example.todoapp.data.DatabaseService
+import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.model.Activities
 import com.example.todoapp.ui.TodoViewModel
 
@@ -61,7 +60,7 @@ class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapte
         }
 
         holder.view.setOnClickListener {
-            DatabaseService.getCurrentUser()
+            CurrentUserHolder.getCurrentUser()
                 ?.let { it1 -> viewModel.updateItemStatus(it1, position) }
             notifyItemChanged(position)
         }

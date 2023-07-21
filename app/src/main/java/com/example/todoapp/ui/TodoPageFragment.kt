@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.adapter.RecViewAdapter
-import com.example.todoapp.data.DatabaseService
+import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.databinding.FragmentTodoPageBinding
 import com.example.todoapp.model.UiState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class TodoPageFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecViewAdapter
@@ -35,7 +36,7 @@ class TodoPageFragment : Fragment() {
 
         adapter.setOnItemClickListener(object : RecViewAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                DatabaseService.getCurrentUser()
+                CurrentUserHolder.getCurrentUser()
                     ?.let { todoViewModel.updateItemStatus(it,position) }
             }
         })
@@ -51,13 +52,12 @@ class TodoPageFragment : Fragment() {
         }
 
         onClickAddItem(binding)
-        println(DatabaseService.getCurrentUser())
 
         return binding.root
     }
 
     private fun displayName(binding: FragmentTodoPageBinding) {
-        val currentUserFullName = DatabaseService.getCurrentUser()?.fullname
+        val currentUserFullName = CurrentUserHolder.getCurrentUser()?.fullname
         val welcomeMessage = getString(R.string.welcome_message, currentUserFullName)
         binding.nameText.text = welcomeMessage
     }

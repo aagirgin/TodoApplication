@@ -1,17 +1,23 @@
 package com.example.todoapp.ui
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.todoapp.data.DatabaseService
+import com.example.todoapp.data.CurrentUserHolder
+import com.example.todoapp.data.UserDatabaseRepository
 import com.example.todoapp.model.Activities
 import com.example.todoapp.model.ApplicationUser
 import com.example.todoapp.model.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TodoViewModel : ViewModel() {
+@HiltViewModel
+class TodoViewModel @Inject constructor(
+    private val userDatabaseRepository: UserDatabaseRepository
+    ) : ViewModel() {
+
     private val _additionState = MutableStateFlow<UiState<*>>(UiState.Empty)
     val additionState: StateFlow<UiState<*>> get() = _additionState
 
@@ -20,7 +26,7 @@ class TodoViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _activitiesState.value = DatabaseService.getCurrentUser()?.listOfActivities ?: emptyList()
+            _activitiesState.value = CurrentUserHolder.getCurrentUser()?.listOfActivities ?: emptyList()
         }
     }
 
@@ -33,7 +39,7 @@ class TodoViewModel : ViewModel() {
 
             viewModelScope.launch {
                 try {
-                    DatabaseService.updateUserActivityStatus(applicationUser)
+                    userDatabaseRepository.updateUserActivityStatus(applicationUser)
                 } catch (e: Exception) {
                     println(e.message)
                 }
@@ -46,9 +52,9 @@ class TodoViewModel : ViewModel() {
         viewModelScope.launch {
             _additionState.value = UiState.Loading
             try {
-                DatabaseService.addActivityElement(item)
+                userDatabaseRepository.addActivityItem(item)
                 _additionState.value = UiState.Success(true)
-                _activitiesState.value = DatabaseService.getCurrentUser()?.listOfActivities ?: emptyList()
+                _activitiesState.value = CurrentUserHolder.getCurrentUser()?.listOfActivities ?: emptyList()
             } catch (e: Exception) {
                 _additionState.value = UiState.Error("Failed to add item: ${e.message}")
             }

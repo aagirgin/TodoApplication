@@ -10,12 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
-import com.example.todoapp.data.DatabaseService
 import com.example.todoapp.databinding.FragmentSignUpBinding
 import com.example.todoapp.model.ApplicationUser
 import com.example.todoapp.model.UiState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private val signUpViewModel: SignUpViewModel by viewModels()

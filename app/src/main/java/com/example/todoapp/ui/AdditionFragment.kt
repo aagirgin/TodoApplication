@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
-import com.example.todoapp.data.DatabaseService
 import com.example.todoapp.databinding.FragmentAdditionBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class AdditionFragment : Fragment() {
-    private val additionFragment: AdditionViewModel by viewModels()
+    private val additionViewModel: AdditionViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,12 +36,11 @@ class AdditionFragment : Fragment() {
             val text3 = binding.addition3.editText?.text.toString()
 
             lifecycleScope.launch {
-                if(!text1.isBlank()) DatabaseService.addActivityElement(text1)
-                if(!text2.isBlank()) DatabaseService.addActivityElement(text2)
-                if(!text3.isBlank()) DatabaseService.addActivityElement(text3)
+                if (!text1.isBlank()) additionViewModel.addItemIntoUser(text1)
+                if (!text2.isBlank()) additionViewModel.addItemIntoUser(text2)
+                if (!text3.isBlank()) additionViewModel.addItemIntoUser(text3)
 
                 findNavController().navigate(R.id.action_additionFragment_to_todoPageFragment)
-                println(DatabaseService.getCurrentUser())
             }
         }
     }
