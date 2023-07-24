@@ -64,10 +64,10 @@ class SignUpFragment : Fragment() {
     private fun registerUser(binding: FragmentSignUpBinding) {
         binding.signUpButton.setOnClickListener {
 
-            val mail = binding.enterEmail.editText?.text.toString()
-            val password = binding.createPassword.editText?.text.toString()
-            val passwordCheck = binding.confirmPassword.editText?.text.toString()
-            val fullName = binding.enterFullName.editText?.text.toString()
+            val mail = binding.enterEmail.text.toString()
+            val password = binding.createPassword.text.toString()
+            val passwordCheck = binding.confirmPassword.text.toString()
+            val fullName = binding.enterFullName.text.toString()
 
             lifecycleScope.launch {
             val isNotBlank = isBlankItem(mail,password,passwordCheck,fullName)

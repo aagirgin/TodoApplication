@@ -51,8 +51,8 @@ class LoginFragment : Fragment() {
             // Disable the login button to prevent multiple clicks during login process
             binding.loginButton.isEnabled = false
 
-            val email = binding.emailField.editText?.text.toString()
-            val passwd = binding.password.editText?.text.toString()
+            val email = binding.emailField.text.toString()
+            val passwd = binding.password.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
                 val isNotBlank = isBlankItem(email,passwd)
