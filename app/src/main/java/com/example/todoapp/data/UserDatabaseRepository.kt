@@ -1,44 +1,17 @@
 package com.example.todoapp.data
 
-import com.example.todoapp.domain.model.Activities
 import com.example.todoapp.domain.model.ApplicationUser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class UserDatabaseRepository @Inject constructor(
-    private val userDao: UserDao
-) {
+interface UserDatabaseRepository {
 
-    suspend fun registerUser(user: ApplicationUser){
-        userDao.insertUser(user)
-    }
+    suspend fun registerUser(user: ApplicationUser)
 
-    suspend fun getUser(email:String,pass:String): ApplicationUser?{
-        val currentUser = userDao.getUser(email,pass)
-        CurrentUserHolder.setCurrentUser(currentUser)
-        return currentUser
-    }
+    suspend fun getUser(email: String, pass: String): ApplicationUser?
 
-    suspend fun addActivityItem(activityItem: String) {
-        CurrentUserHolder.getCurrentUser()?.let { currentUser ->
-            val updatedActivities = currentUser.listOfActivities.toMutableList()
-            val newActivity = Activities(activity = activityItem)
-            updatedActivities.add(newActivity)
-            currentUser.listOfActivities = updatedActivities
-            userDao.updateUser(currentUser)
-        }
-    }
+    suspend fun addActivityItem(activityItem: String)
 
-    suspend fun updateUserActivityStatus(user: ApplicationUser) {
-        userDao.updateUser(user)
-    }
+    suspend fun updateUserActivityStatus(user: ApplicationUser)
 
-    suspend fun checkEmailExists(email: String): Boolean {
-        return withContext(Dispatchers.IO) {
-            userDao.getUserByEmail(email) != null
-        }
-    }
-
+    suspend fun checkEmailExists(email: String): Boolean
 
 }

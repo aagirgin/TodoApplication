@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.todoapp.data.UserDao
 import com.example.todoapp.data.UserDatabase
+import com.example.todoapp.data.UserDatabaseRepository
+import com.example.todoapp.data.UserDatabaseRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +22,10 @@ object RoomModule {
             .databaseBuilder(context, UserDatabase::class.java,"user-database")
             .build()
     }
-
+    @Provides
+    fun provideUserDatabaseRepository(repository: UserDatabaseRepositoryImpl): UserDatabaseRepository {
+        return repository
+    }
     @Provides
     fun provideUserDao(userDatabase: UserDatabase): UserDao {
         return userDatabase.userDao()
