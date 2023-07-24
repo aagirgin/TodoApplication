@@ -19,7 +19,7 @@ class AdditionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentAdditionBinding.inflate(inflater,container,false)
 
         addListOnClick(binding)
@@ -36,9 +36,9 @@ class AdditionFragment : Fragment() {
             val text3 = binding.addition3.editText?.text.toString()
 
             lifecycleScope.launch {
-                if (!text1.isBlank()) additionViewModel.addItemIntoUser(text1)
-                if (!text2.isBlank()) additionViewModel.addItemIntoUser(text2)
-                if (!text3.isBlank()) additionViewModel.addItemIntoUser(text3)
+                if (text1.isNotBlank()) additionViewModel.addItemIntoUser(text1)
+                if (text2.isNotBlank()) additionViewModel.addItemIntoUser(text2)
+                if (text3.isNotBlank()) additionViewModel.addItemIntoUser(text3)
 
                 findNavController().navigate(R.id.action_additionFragment_to_todoPageFragment)
             }

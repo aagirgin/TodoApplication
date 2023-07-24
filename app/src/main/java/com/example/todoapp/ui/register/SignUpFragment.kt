@@ -24,7 +24,7 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         val binding = FragmentSignUpBinding.inflate(inflater, container, false)
@@ -46,7 +46,7 @@ class SignUpFragment : Fragment() {
         return if (emailRegex.matches(mail)) null else SignUpError.InvalidEmail
     }
 
-    private suspend fun checkforSameMailAddress(mail: String): SignUpError.EmailExists? {
+    private suspend fun checkForSameMailAddress(mail: String): SignUpError.EmailExists? {
         val emailExists = signUpViewModel.checkEmailExists(mail)
         return if (emailExists) SignUpError.EmailExists else null
     }
@@ -55,7 +55,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun isBlankItem(mail:String, pass:String, pass2:String, fullName:String): SignUpError.BlankItem? {
-        return if (!mail.isNullOrBlank() && !pass.isNullOrBlank() && !pass2.isNullOrBlank() && !fullName.isNullOrBlank())
+        return if (mail.isNotBlank() && pass.isNotBlank() && pass2.isNotBlank() && fullName.isNotBlank())
             null
         else
             SignUpError.BlankItem
@@ -73,7 +73,7 @@ class SignUpFragment : Fragment() {
             val isNotBlank = isBlankItem(mail,password,passwordCheck,fullName)
             val isValidMail = mailValidation(mail)
             val isPassMatch = checkPassword(password,passwordCheck)
-            val isMailNotSame = checkforSameMailAddress(mail)
+            val isMailNotSame = checkForSameMailAddress(mail)
 
             if (isNotBlank == null && isValidMail == null && isPassMatch == null && isMailNotSame == null) {
                 val user = ApplicationUser(

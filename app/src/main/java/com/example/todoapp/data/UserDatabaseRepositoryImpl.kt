@@ -1,7 +1,7 @@
 package com.example.todoapp.data
 
-import com.example.todoapp.domain.model.Activities
 import com.example.todoapp.domain.model.ApplicationUser
+import com.example.todoapp.domain.model.UserActivities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class UserDatabaseRepositoryImpl @Inject constructor(
     override suspend fun addActivityItem(activityItem: String) {
         CurrentUserHolder.getCurrentUser()?.let { currentUser ->
             val updatedActivities = currentUser.listOfActivities.toMutableList()
-            val newActivity = Activities(activity = activityItem)
+            val newActivity = UserActivities(activityName = activityItem)
             updatedActivities.add(newActivity)
             currentUser.listOfActivities = updatedActivities
             userDao.updateUser(currentUser)

@@ -8,13 +8,13 @@ class ListActivitiesConverter {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromListActivities(list: List<Activities>): String {
+    fun fromListActivities(list: List<UserActivities>): String {
         return gson.toJson(list)
     }
 
     @TypeConverter
-    fun toListActivities(json: String): List<Activities> {
-        val type = object : TypeToken<List<Activities>>() {}.type
+    fun toListActivities(json: String): List<UserActivities> {
+        val type = object : TypeToken<List<UserActivities>>() {}.type
         return gson.fromJson(json, type)
     }
 }

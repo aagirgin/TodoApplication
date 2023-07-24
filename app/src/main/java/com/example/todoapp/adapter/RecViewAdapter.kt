@@ -7,12 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.CurrentUserHolder
-import com.example.todoapp.domain.model.Activities
+import com.example.todoapp.domain.model.CompletedStatus
+import com.example.todoapp.domain.model.UserActivities
 import com.example.todoapp.ui.todomain.TodoViewModel
 
 
 class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapter<RecViewAdapter.ViewHolder>() {
-    private var data: List<Activities> = emptyList()
+    private var data: List<UserActivities> = emptyList()
     private var onItemClickListener: OnItemClickListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,7 +38,7 @@ class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapte
         onItemClickListener = listener
     }
 
-    fun setData(newData: List<Activities>) {
+    fun setData(newData: List<UserActivities>) {
         data = newData
         notifyDataSetChanged()
     }
@@ -51,9 +52,9 @@ class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val activity = data[position]
-        holder.itemName.text = activity.activity
+        holder.itemName.text = activity.activityName
 
-        if (activity.isDone == 1) {
+        if (activity.isDone == CompletedStatus.COMPLETED) {
             holder.view.setBackgroundResource(R.drawable.radiobuttonselectorselected)
         } else {
             holder.view.setBackgroundResource(R.drawable.radiobuttonselector)

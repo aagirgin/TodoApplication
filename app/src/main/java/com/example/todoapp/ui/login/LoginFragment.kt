@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentLoginBinding.inflate(inflater,container,false)
 
         onPressNavigateSignUp(binding)
@@ -40,18 +40,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun isBlankItem(mail:String, pass:String): LogInError.BlankItem? {
-        return if (!mail.isNullOrBlank() && !pass.isNullOrBlank())
+        return if (mail.isNotBlank() && pass.isNotBlank())
             null
         else
             LogInError.BlankItem
     }
 
-    private suspend fun isWrongCredentials() : LogInError.InvalidCredentials? {
-        loginViewModel.currentUserState.collect{ it ->
-            if (it == null)
-                LogInError.InvalidCredentials
-        }
-    }
     private fun onPressLogin(binding: FragmentLoginBinding) {
         binding.loginButton.setOnClickListener {
             // Disable the login button to prevent multiple clicks during login process

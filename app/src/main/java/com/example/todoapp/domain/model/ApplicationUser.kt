@@ -14,11 +14,6 @@ data class ApplicationUser(
     val password: String,
     val fullname: String,
     @ColumnInfo(name = "listOfActivities")
-    var listOfActivities: MutableList<Activities> = mutableListOf()
+    var listOfActivities: MutableList<UserActivities> = mutableListOf()
 )
-data class Activities(
-    var isDone: Int = 0,
-    val activity: String
-)
-
 

@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.data.UserDatabaseRepository
-import com.example.todoapp.domain.model.Activities
 import com.example.todoapp.domain.model.ApplicationUser
+import com.example.todoapp.domain.model.CompletedStatus
+import com.example.todoapp.domain.model.UserActivities
 import com.example.todoapp.domain.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +22,8 @@ class TodoViewModel @Inject constructor(
     private val _additionState = MutableStateFlow<UiState<*>>(UiState.Empty)
     val additionState: StateFlow<UiState<*>> get() = _additionState
 
-    private val _activitiesState = MutableStateFlow<List<Activities>>(emptyList())
-    val activitiesState: StateFlow<List<Activities>> get() = _activitiesState
+    private val _activitiesState = MutableStateFlow<List<UserActivities>>(emptyList())
+    val activitiesState: StateFlow<List<UserActivities>> get() = _activitiesState
 
     init {
         viewModelScope.launch {
@@ -34,7 +35,7 @@ class TodoViewModel @Inject constructor(
     fun updateItemStatus(applicationUser: ApplicationUser, position: Int) {
         if (position >= 0 && position < applicationUser.listOfActivities.size) {
             val updatedActivity = applicationUser.listOfActivities[position]
-            updatedActivity.isDone = if (updatedActivity.isDone == 1) 0 else 1
+            updatedActivity.isDone = if (updatedActivity.isDone == CompletedStatus.COMPLETED) CompletedStatus.INCOMPLETE else CompletedStatus.COMPLETED
             applicationUser.listOfActivities[position] = updatedActivity
 
             viewModelScope.launch {

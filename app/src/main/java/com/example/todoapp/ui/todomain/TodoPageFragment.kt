@@ -25,7 +25,7 @@ class TodoPageFragment : Fragment() {
     private lateinit var adapter: RecViewAdapter
     private val todoViewModel: TodoViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FragmentTodoPageBinding.inflate(inflater, container, false)
 
         displayName(binding)
