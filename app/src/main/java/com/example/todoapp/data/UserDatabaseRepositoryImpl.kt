@@ -10,10 +10,9 @@ class UserDatabaseRepositoryImpl @Inject constructor(
     private val userDao: UserDao
 ) : UserDatabaseRepository {
 
-    override suspend fun registerUser(user: ApplicationUser) {
-        userDao.insertUser(user)
+    override suspend fun registerUser(user: ApplicationUser): Boolean {
+        return userDao.insertUser(user) > 0
     }
-
     override suspend fun getUser(email: String, pass: String): ApplicationUser? {
         val currentUser = userDao.getUser(email, pass)
         CurrentUserHolder.setCurrentUser(currentUser)
@@ -40,3 +39,5 @@ class UserDatabaseRepositoryImpl @Inject constructor(
         }
     }
 }
+
+

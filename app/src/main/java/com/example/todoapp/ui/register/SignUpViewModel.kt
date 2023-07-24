@@ -2,6 +2,7 @@ package com.example.todoapp.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todoapp.R
 import com.example.todoapp.data.UserDatabaseRepository
 import com.example.todoapp.domain.model.ApplicationUser
 import com.example.todoapp.domain.state.UiState
@@ -32,14 +33,15 @@ class SignUpViewModel@Inject constructor(
     fun signUpUser(user: ApplicationUser) {
         viewModelScope.launch {
             _registerState.value = UiState.Loading
-            try {
-                userDatabaseRepository.registerUser(user)
+
+            if(userDatabaseRepository.registerUser(user)){
                 _registerState.value = UiState.Success(true)
-            } catch (e: Exception) {
-                _registerState.value = UiState.Error("Failed to sign up: ${e.message}")
             }
+            else{
+                _registerState.value = UiState.Error("${R.string.failed_credentials}")
+            }
+
         }
     }
-
 
 }

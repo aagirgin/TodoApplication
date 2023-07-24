@@ -71,7 +71,7 @@ class TodoPageFragment : Fragment() {
                 todoViewModel.additionState.collect { state ->
                     when (state) {
                         is UiState.Success -> {
-                            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show()
                             binding.taskToBeAdded.text = null
                         }
                         is UiState.Error -> {

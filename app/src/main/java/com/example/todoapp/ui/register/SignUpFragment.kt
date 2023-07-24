@@ -88,7 +88,10 @@ class SignUpFragment : Fragment() {
                                 //TODO
                             }
                             is UiState.Success -> {
-                                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(),
+                                    getString(R.string.success_message), Toast.LENGTH_SHORT).show()
+                                println(R.string.success_message.toString())
+                                println(R.string.success_message)
                                 findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
                             }
                             is UiState.Error -> {

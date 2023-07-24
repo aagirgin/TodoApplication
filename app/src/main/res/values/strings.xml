@@ -20,4 +20,15 @@ tempore! Animi nemo aut atque,
     <string name="enter_your_full_name">Enter your Full Name</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="welcome_message">Welcome, %s</string>
+    <string name="elipseimage">elipseImage</string>
+    <string name="kidwithboard">kidWithBoard</string>
+    <string name="backbutton">BackButton</string>
+   <string name="welcome_back">Welcome Back!</string>
+   <string name="let_s_help_you_meet_up_your_task">Let\'s help you meet up your task</string>
+    <string name="todo_tasks">Todo Tasks.</string>
+    <string name="dairy_tasks">Dairy Tasks</string>
+    <string name="add_to_list">Add to List</string>
+    <string name="add_what_your_want_to_do_later_on">Add. What your want to do later on…</string>
+    <string name="success_message">Success</string>
+    <string name="failed_credentials">Failed to sign up, please check your credentials.</string>
 </resources>
