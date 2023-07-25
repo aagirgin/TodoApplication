@@ -30,5 +30,8 @@ tempore! Animi nemo aut atque,
     <string name="add_to_list">Add to List</string>
     <string name="add_what_your_want_to_do_later_on">Add. What your want to do later on…</string>
     <string name="success_message">Success</string>
+    <string name="not_success_message">Not Successful</string>
     <string name="failed_credentials">Failed to sign up, please check your credentials.</string>
+    <string name="adready_auth">User already authenticated</string>
+
 </resources>

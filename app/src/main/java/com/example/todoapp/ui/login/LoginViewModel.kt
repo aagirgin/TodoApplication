@@ -2,6 +2,7 @@ package com.example.todoapp.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todoapp.R
 import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.data.UserDatabaseRepository
 import com.example.todoapp.domain.model.ApplicationUser
@@ -27,7 +28,7 @@ class LoginViewModel @Inject constructor(
     init {
         if(isAuthenticated()){
             viewModelScope.launch {
-                evenChannel.send(LoginEvent.SuccessEvent("User already authenticated"))
+                evenChannel.send(LoginEvent.SuccessEvent(R.string.adready_auth.toString()))
             }
         }
     }
@@ -44,10 +45,10 @@ class LoginViewModel @Inject constructor(
         _currentUserState.value = currentUser
         viewModelScope.launch {
             if (currentUser != null){
-                evenChannel.send(LoginEvent.SuccessEvent("Succesful"))
+                evenChannel.send(LoginEvent.SuccessEvent(R.string.success_message.toString()))
             }
             else{
-                evenChannel.send(LoginEvent.ErrorEvent("Unsuccesful"))
+                evenChannel.send(LoginEvent.ErrorEvent(R.string.not_success_message.toString()))
             }
         }
 
@@ -56,11 +57,11 @@ class LoginViewModel @Inject constructor(
     fun checkAuthenticationAndProceed() {
         if (isAuthenticated()) {
             viewModelScope.launch {
-                evenChannel.send(LoginEvent.SuccessEvent("User already authenticated"))
+                evenChannel.send(LoginEvent.SuccessEvent(R.string.adready_auth.toString()))
             }
         }
     }
-    fun isAuthenticated(): Boolean{
+    private fun isAuthenticated(): Boolean{
         return CurrentUserHolder.getCurrentUser() != null
     }
 
