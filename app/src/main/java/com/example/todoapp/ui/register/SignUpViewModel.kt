@@ -2,8 +2,10 @@ package com.example.todoapp.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation.findNavController
 import com.example.todoapp.R
 import com.example.todoapp.data.UserDatabaseRepository
+import com.example.todoapp.databinding.FragmentSignUpBinding
 import com.example.todoapp.domain.model.ApplicationUser
 import com.example.todoapp.domain.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

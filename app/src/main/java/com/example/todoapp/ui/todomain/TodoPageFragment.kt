@@ -41,9 +41,6 @@ class TodoPageFragment : Fragment() {
             }
         })
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-
-        }
 
         lifecycleScope.launch {
             todoViewModel.activitiesState.collect { activities ->

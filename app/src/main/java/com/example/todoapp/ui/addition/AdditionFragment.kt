@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentAdditionBinding
+import com.example.todoapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,12 +23,11 @@ class AdditionFragment : Fragment() {
     ): View {
         val binding = FragmentAdditionBinding.inflate(inflater,container,false)
 
+        onBackButtonPressed(binding)
         addListOnClick(binding)
 
         return binding.root
     }
-
-
 
     private fun addListOnClick(binding: FragmentAdditionBinding){
         binding.addlistBtn.setOnClickListener {
@@ -42,6 +42,11 @@ class AdditionFragment : Fragment() {
 
                 findNavController().navigate(R.id.action_additionFragment_to_todoPageFragment)
             }
+        }
+    }
+    private fun onBackButtonPressed(binding: FragmentAdditionBinding){
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }

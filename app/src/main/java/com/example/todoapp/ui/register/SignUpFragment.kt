@@ -29,6 +29,7 @@ class SignUpFragment : Fragment() {
 
         val binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
+        onBackButtonPressed(binding)
         registerUser(binding)
         onPressNavigateSignIn(binding)
 
@@ -60,7 +61,11 @@ class SignUpFragment : Fragment() {
         else
             SignUpError.BlankItem
     }
-
+    private fun onBackButtonPressed(binding: FragmentSignUpBinding){
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
     private fun registerUser(binding: FragmentSignUpBinding) {
         binding.signUpButton.setOnClickListener {
 
