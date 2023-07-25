@@ -8,66 +8,69 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EDEDED"
         tools:context=".ui.todomain.TodoPageFragment">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageview_ellipse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ellipse"
+            android:src="@drawable/ic_ellipse"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/elipseimage"/>
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/imageview_rectangle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/rectangle"
+            android:src="@drawable/ic_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/rectangle_image" />
 
         <ImageView
-            android:id="@+id/imageView12"
+            android:id="@+id/imageview_useravatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/handsome"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"
-            app:layout_constraintVertical_bias="0.4324" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_rectangle"
+            app:layout_constraintVertical_bias="0.4324"
+            android:contentDescription="@string/user_avatar_image" />
 
         <ImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/imageview_youngwoman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/youngwoman"
+            android:src="@drawable/ic_youngwoman"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"
-            app:layout_constraintVertical_bias="0.4970" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_rectangle"
+            app:layout_constraintVertical_bias="0.4970"
+            android:contentDescription="@string/image_of_a_young_woman" />
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/textview_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsmedium"
             android:textColor="#000000"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_useravatar"
             app:layout_constraintVertical_bias="0.3518" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textview_todotasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsmedium"
@@ -77,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0973"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+            app:layout_constraintTop_toBottomOf="@+id/imageview_youngwoman" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -96,7 +99,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cardview_todotasks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clickable="false"
@@ -114,17 +117,16 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/taskToBeAdded"
+                    android:id="@+id/textinput_taskstobeadded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="34dp"
                     android:layout_marginEnd="34dp"
                     android:alpha="0.7"
-                    android:background="@drawable/rounded_edittext_background"
+                    android:background="@drawable/inputlayout_edittext_background"
                     android:fontFamily="@font/poppinsmedium"
                     android:hint="@string/dairy_tasks"
                     android:paddingTop="13dp"
-                    android:paddingEnd="29dp"
                     android:paddingBottom="10dp"
                     android:textAlignment="viewStart"
                     android:textColorHint="#BD000000"
@@ -136,13 +138,14 @@
                     app:layout_constraintVertical_bias="0.058" />
 
                 <ImageView
-                    android:id="@+id/additionButton"
+                    android:id="@+id/imageview_additionbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/addicon"
-                    app:layout_constraintBottom_toBottomOf="@+id/taskToBeAdded"
-                    app:layout_constraintEnd_toEndOf="@+id/taskToBeAdded"
-                    app:layout_constraintTop_toTopOf="@+id/taskToBeAdded" />
+                    android:src="@drawable/ic_addicon"
+                    app:layout_constraintBottom_toBottomOf="@+id/textinput_taskstobeadded"
+                    app:layout_constraintEnd_toEndOf="@+id/textinput_taskstobeadded"
+                    app:layout_constraintTop_toTopOf="@+id/textinput_taskstobeadded"
+                    android:contentDescription="@string/addition_button" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -152,9 +155,9 @@
                     android:layout_marginStart="34dp"
                     android:layout_marginEnd="34dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/taskToBeAdded"
-                    app:layout_constraintStart_toStartOf="@+id/taskToBeAdded"
-                    app:layout_constraintTop_toBottomOf="@+id/taskToBeAdded" />
+                    app:layout_constraintEnd_toEndOf="@+id/textinput_taskstobeadded"
+                    app:layout_constraintStart_toStartOf="@+id/textinput_taskstobeadded"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_taskstobeadded" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

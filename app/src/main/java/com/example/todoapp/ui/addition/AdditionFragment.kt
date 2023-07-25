@@ -31,29 +31,28 @@ class AdditionFragment : Fragment() {
     }
 
     private fun addListOnClick(binding: FragmentAdditionBinding){
-        binding.addlistBtn.setOnClickListener {
-            val text1 = binding.addition1.editText?.text.toString()
-            val text2 = binding.addition2.editText?.text.toString()
-            val text3 = binding.addition3.editText?.text.toString()
+        binding.buttonAddtolist.setOnClickListener {
+            val text1 = binding.textinputAddition1.editText?.text.toString()
+            val text2 = binding.textinputAddition2.editText?.text.toString()
+            val text3 = binding.textinputAddition3.editText?.text.toString()
 
-            lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 if (text1.isNotBlank()) additionViewModel.addItemIntoUser(text1)
                 if (text2.isNotBlank()) additionViewModel.addItemIntoUser(text2)
                 if (text3.isNotBlank()) additionViewModel.addItemIntoUser(text3)
                 additionViewModel.additionState.collect{ state->
                     when(state){
+                        is UiState.Empty -> findNavController().navigate(R.id.action_additionFragment_to_todoPageFragment)
                         is UiState.Success -> findNavController().navigate(R.id.action_additionFragment_to_todoPageFragment)
                         is UiState.Error -> Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                         else -> {}
                     }
                 }
-
-
             }
         }
     }
     private fun onBackButtonPressed(binding: FragmentAdditionBinding){
-        binding.backBtn.setOnClickListener {
+        binding.imageviewBackbutton.setOnClickListener {
             findNavController().popBackStack()
         }
     }

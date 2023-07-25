@@ -37,7 +37,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun onPressNavigateSignIn(binding: FragmentSignUpBinding){
-        binding.SignInTextButton.setOnClickListener {
+        binding.textviewSignintextbutton.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
         }
     }
@@ -62,17 +62,17 @@ class SignUpFragment : Fragment() {
             SignUpError.BlankItem
     }
     private fun onBackButtonPressed(binding: FragmentSignUpBinding){
-        binding.backBtn.setOnClickListener {
+        binding.imageviewBackbutton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
     private fun registerUser(binding: FragmentSignUpBinding) {
-        binding.signUpButton.setOnClickListener {
+        binding.buttonSignup.setOnClickListener {
 
-            val mail = binding.enterEmail.text.toString()
-            val password = binding.createPassword.text.toString()
-            val passwordCheck = binding.confirmPassword.text.toString()
-            val fullName = binding.enterFullName.text.toString()
+            val mail = binding.textinputMail.text.toString()
+            val password = binding.textinputCreatepassword.text.toString()
+            val passwordCheck = binding.textinputConfirmpassword.text.toString()
+            val fullName = binding.textinputFullname.text.toString()
 
             lifecycleScope.launch {
             val isNotBlank = isBlankItem(mail,password,passwordCheck,fullName)

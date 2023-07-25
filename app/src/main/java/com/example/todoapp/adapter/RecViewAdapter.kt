@@ -17,8 +17,8 @@ class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapte
     private var onItemClickListener: OnItemClickListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var itemName: TextView = itemView.findViewById(R.id.textView7)
-        var view: View = itemView.findViewById(R.id.view3) // Add reference to the view
+        var itemName: TextView = itemView.findViewById(R.id.textview_activityname)
+        var view: View = itemView.findViewById(R.id.view_selectorbutton)
 
         init {
             itemView.setOnClickListener {
@@ -55,9 +55,9 @@ class RecViewAdapter(private val viewModel: TodoViewModel) : RecyclerView.Adapte
         holder.itemName.text = activity.activityName
 
         if (activity.isDone == CompletedStatus.COMPLETED) {
-            holder.view.setBackgroundResource(R.drawable.radiobuttonselectorselected)
+            holder.view.setBackgroundResource(R.drawable.btn_order_selected_border)
         } else {
-            holder.view.setBackgroundResource(R.drawable.radiobuttonselector)
+            holder.view.setBackgroundResource(R.drawable.btn_order_normal)
         }
 
         holder.view.setOnClickListener {

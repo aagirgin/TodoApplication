@@ -8,12 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentLoginBinding
-import com.example.todoapp.databinding.FragmentSignUpBinding
 import com.example.todoapp.domain.state.LogInError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -38,7 +35,7 @@ class LoginFragment : Fragment() {
 
 
     private fun onPressNavigateSignUp(binding: FragmentLoginBinding){
-        binding.SignUpTextButton.setOnClickListener {
+        binding.textviewSignuptextbutton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
@@ -51,7 +48,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun onBackButtonPressed(binding: FragmentLoginBinding){
-        binding.backBtn.setOnClickListener {
+        binding.imageviewBackbutton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -72,11 +69,11 @@ class LoginFragment : Fragment() {
         } }
     }
     private fun onPressLogin(binding: FragmentLoginBinding) {
-        binding.loginButton.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
 
 
-            val email = binding.emailField.text.toString()
-            val passwd = binding.password.text.toString()
+            val email = binding.textinputEmail.text.toString()
+            val passwd = binding.textinputPassword.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
                 val isNotBlank = isBlankItem(email,passwd)

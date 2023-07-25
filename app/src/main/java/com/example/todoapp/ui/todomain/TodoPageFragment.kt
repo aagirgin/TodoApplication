@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,12 +55,12 @@ class TodoPageFragment : Fragment() {
     private fun displayName(binding: FragmentTodoPageBinding) {
         val currentUserFullName = CurrentUserHolder.getCurrentUser()?.fullname
         val welcomeMessage = getString(R.string.welcome_message, currentUserFullName)
-        binding.nameText.text = welcomeMessage
+        binding.textviewUsername.text = welcomeMessage
     }
 
     private fun onClickAddItem(binding: FragmentTodoPageBinding) {
-        binding.additionButton.setOnClickListener {
-            val textAdd = binding.taskToBeAdded.text.toString()
+        binding.imageviewAdditionbutton.setOnClickListener {
+            val textAdd = binding.textinputTaskstobeadded.text.toString()
 
             lifecycleScope.launch {
                 todoViewModel.addItemToRoomDatabase(textAdd)
@@ -69,7 +68,7 @@ class TodoPageFragment : Fragment() {
                     when (state) {
                         is UiState.Success -> {
                             Toast.makeText(requireContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show()
-                            binding.taskToBeAdded.text = null
+                            binding.textinputTaskstobeadded.text = null
                         }
                         is UiState.Error -> {
                             Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()

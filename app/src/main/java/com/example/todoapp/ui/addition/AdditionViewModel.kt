@@ -22,6 +22,7 @@ class AdditionViewModel @Inject constructor(
         viewModelScope.launch {
             _additionState.value = UiState.Loading
             try {
+
                 val isAddedSuccessfully = userDatabaseRepository.addActivityItem(activityItem)
                 if(isAddedSuccessfully){
                     _additionState.value = UiState.Success(true)

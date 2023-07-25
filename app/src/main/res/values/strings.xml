@@ -34,5 +34,11 @@ tempore! Animi nemo aut atque,
     <string name="failed_credentials">Failed to sign up, please check your credentials.</string>
     <string name="adready_auth">User already authenticated</string>
     <string name="item_add_fail">Failed to add item</string>
+    <string name="image_of_boy_and_girl">Image of Boy and Girl</string>
+    <string name="image_of_a_guy_sitting">Image of a guy sitting</string>
+    <string name="rectangle_image">Rectangle Image</string>
+    <string name="user_avatar_image">User Avatar Image</string>
+    <string name="image_of_a_young_woman">Image of a Young Woman</string>
+    <string name="addition_button">Addition Button</string>
 
 </resources>
