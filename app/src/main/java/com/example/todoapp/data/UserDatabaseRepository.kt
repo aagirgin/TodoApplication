@@ -8,7 +8,7 @@ interface UserDatabaseRepository {
 
     suspend fun getUser(email: String, pass: String): ApplicationUser?
 
-    suspend fun addActivityItem(activityItem: String)
+    suspend fun addActivityItem(activityItem: String) : Boolean
 
     suspend fun updateUserActivityStatus(user: ApplicationUser)
 

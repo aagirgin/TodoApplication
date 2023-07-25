@@ -2,6 +2,7 @@ package com.example.todoapp.ui.todomain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todoapp.R
 import com.example.todoapp.data.CurrentUserHolder
 import com.example.todoapp.data.UserDatabaseRepository
 import com.example.todoapp.domain.model.ApplicationUser
@@ -48,16 +49,19 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-
     fun addItemToRoomDatabase(item: String) {
         viewModelScope.launch {
             _additionState.value = UiState.Loading
             try {
-                userDatabaseRepository.addActivityItem(item)
-                _additionState.value = UiState.Success(true)
-                _activitiesState.value = CurrentUserHolder.getCurrentUser()?.listOfActivities ?: emptyList()
+                val isAddedSuccessfully = userDatabaseRepository.addActivityItem(item)
+                if (isAddedSuccessfully) {
+                    _additionState.value = UiState.Success(true)
+                    _activitiesState.value = CurrentUserHolder.getCurrentUser()?.listOfActivities ?: emptyList()
+                } else {
+                    _additionState.value = UiState.Error(R.string.item_add_fail.toString())
+                }
             } catch (e: Exception) {
-                _additionState.value = UiState.Error("Failed to add item: ${e.message}")
+                _additionState.value = UiState.Error("${R.string.item_add_fail.toString()} ${e.message}")
             }
         }
     }

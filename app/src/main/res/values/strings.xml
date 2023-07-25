@@ -33,5 +33,6 @@ tempore! Animi nemo aut atque,
     <string name="not_success_message">Not Successful</string>
     <string name="failed_credentials">Failed to sign up, please check your credentials.</string>
     <string name="adready_auth">User already authenticated</string>
+    <string name="item_add_fail">Failed to add item</string>
 
 </resources>

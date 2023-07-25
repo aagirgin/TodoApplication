@@ -19,13 +19,18 @@ class UserDatabaseRepositoryImpl @Inject constructor(
         return currentUser
     }
 
-    override suspend fun addActivityItem(activityItem: String) {
-        CurrentUserHolder.getCurrentUser()?.let { currentUser ->
-            val updatedActivities = currentUser.listOfActivities.toMutableList()
-            val newActivity = UserActivities(activityName = activityItem)
-            updatedActivities.add(newActivity)
-            currentUser.listOfActivities = updatedActivities
-            userDao.updateUser(currentUser)
+    override suspend fun addActivityItem(activityItem: String):Boolean {
+        return try {
+            CurrentUserHolder.getCurrentUser()?.let { currentUser ->
+                val updatedActivities = currentUser.listOfActivities.toMutableList()
+                val newActivity = UserActivities(activityName = activityItem)
+                updatedActivities.add(newActivity)
+                currentUser.listOfActivities = updatedActivities
+                userDao.updateUser(currentUser)
+            }
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 
