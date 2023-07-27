@@ -58,26 +58,29 @@ class TodoPageFragment : Fragment() {
         binding.textviewUsername.text = welcomeMessage
     }
 
+    private fun validationIsBlank(textIn : String):Boolean{
+        return textIn.isBlank()
+    }
     private fun onClickAddItem(binding: FragmentTodoPageBinding) {
         binding.imageviewAdditionbutton.setOnClickListener {
             val textAdd = binding.textinputTaskstobeadded.text.toString()
-
-            lifecycleScope.launch {
-                todoViewModel.addItemToRoomDatabase(textAdd)
-                todoViewModel.additionState.collect { state ->
-                    when (state) {
-                        is UiState.Success -> {
-                            Toast.makeText(requireContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show()
-                            binding.textinputTaskstobeadded.text = null
+            if (!validationIsBlank(textAdd)){
+                lifecycleScope.launch {
+                    todoViewModel.addItemToRoomDatabase(textAdd)
+                    todoViewModel.additionState.collect { state ->
+                        when (state) {
+                            is UiState.Success -> {
+                                Toast.makeText(requireContext(), getString(R.string.success_message), Toast.LENGTH_SHORT).show()
+                                binding.textinputTaskstobeadded.text = null
+                            }
+                            is UiState.Error -> {
+                                Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {}
                         }
-                        is UiState.Error -> {
-                            Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {}
                     }
                 }
             }
         }
     }
-
 }

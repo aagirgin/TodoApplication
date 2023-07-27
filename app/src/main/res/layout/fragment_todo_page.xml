@@ -128,6 +128,7 @@
                     android:hint="@string/dairy_tasks"
                     android:paddingTop="13dp"
                     android:paddingBottom="10dp"
+                    android:inputType="text"
                     android:textAlignment="viewStart"
                     android:textColorHint="#BD000000"
                     android:textSize="13sp"
